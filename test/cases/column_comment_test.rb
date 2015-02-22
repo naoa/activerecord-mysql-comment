@@ -29,9 +29,12 @@ class ColumnCommentTest < ActiveRecord::TestCase
   def test_change_column
     @connection.add_column 'column_comments', 'description', :string, comment: 'string_comment'
     @connection.change_column 'column_comments', 'description', :text, comment: 'text_comment'
+
     comment = @connection.select_one("SHOW FULL COLUMNS FROM column_comments WHERE Field = 'description'")["Comment"]
 
-    assert_equal 'text_comment', comment
+    if ActiveRecord::VERSION::STRING >= "4.1.0"
+      assert_equal 'text_comment', comment
+    end
   end
 
   def test_schema_dump_column_collation
