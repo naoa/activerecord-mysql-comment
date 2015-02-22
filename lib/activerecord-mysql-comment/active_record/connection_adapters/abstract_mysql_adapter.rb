@@ -28,7 +28,7 @@ module ActiveRecord
       end
 
       class ColumnDefinition < ActiveRecord::ConnectionAdapters::ColumnDefinition
-        class_attribute :comment
+        attr_accessor :comment
       end
 
       class TableDefinition < ActiveRecord::ConnectionAdapters::TableDefinition
