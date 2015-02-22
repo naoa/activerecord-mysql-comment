@@ -36,7 +36,7 @@ class ColumnCommentTest < ActiveRecord::TestCase
 
   def test_schema_dump_column_collation
     schema = dump_table_schema "column_comments"
-    assert_match %r{t.string\s+"string_non_comment",(?:\s+limit: 255)$}, schema
+    assert_match %r{t.string\s+"string_non_comment"(?:,\s+limit: 255)?$}, schema
     assert_match %r{t.string\s+"string_comment",(?:\s+limit: 255,)?\s+comment: "string_hoge"$}, schema
     assert_match %r{t.text\s+"text_comment",(?:\s+limit: 65535,)?\s+comment: "text_hoge"$}, schema
   end
