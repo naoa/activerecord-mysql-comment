@@ -22,7 +22,43 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+bundle exec rails g migration CreatePosts
+```
+
+```ruby
+class CreatePosts < ActiveRecord::Migration
+  def change
+    create_table :posts, options: 'ENGINE=Mroonga COMMENT="default_tokenizer=TokenMecab"' do |t|
+      t.string :title
+      t.text   :content, comment: 'flags "COLUMN_SCALAR|COMPRESS_ZLIB"'
+      t.timestamps
+    end
+    add_index :posts, :content, type: 'fulltext', comment: 'parser "TokenBigram", normalizer "NormalizerAuto"'
+  end
+end
+```
+
+```ruby
+bundle exec rake db:migrate
+```
+
+```ruby
+  create_table "posts", force: :cascade, options: "ENGINE=Mroonga DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='default_tokenizer=TokenMecab'" do |t|
+    t.string   "title",      limit: 255
+    t.text     "content",    limit: 65535, comment: "flags \"COLUMN_SCALAR|COMPRESS_ZLIB\""
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "posts", ["content"], name: "index_posts_on_content", type: :fulltext, comment: "parser \"TokenBigram\", normalizer \"NormalizerAuto\""
+```
+
+## Note
+
+* Table options need [activerecord-mysql-awesome](https://github.com/kamipo/activerecord-mysql-awesome).
+
+* If you use [activerecord-mysql-awesome](https://github.com/kamipo/activerecord-mysql-awesome), please loading it before load activerecord-mysql-comment.
 
 ## Contributing
 
