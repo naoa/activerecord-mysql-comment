@@ -28,7 +28,7 @@ module ActiveRecord
       end
 
       class ColumnDefinition < ActiveRecord::ConnectionAdapters::ColumnDefinition
-        attr_accessor :comment
+        attr_accessor :auto_increment, :unsigned, :charset, :collation, :comment
       end
 
       class TableDefinition < ActiveRecord::ConnectionAdapters::TableDefinition
