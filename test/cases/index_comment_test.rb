@@ -24,7 +24,6 @@ class IndexCommentTest < ActiveRecord::TestCase
 
   def test_schema_dump_index_comment
     schema = dump_table_schema "index_comments"
-    result = @connection.execute "show create table index_comments;"
     assert_match %r{add_index\s+"index_comments",\s+\[\"string\"\],\s+name:\s+\"index_index_comments_on_string\",\s+using:\s+:btree,\s+comment:\s+\"no_named_index_comment\"$}, schema
     assert_match %r{add_index\s+"index_comments",\s+\[\"string\"\],\s+name:\s+\"named_column\",\s+using:\s+:btree,\s+comment:\s+\"named_index_comment\"$}, schema
     assert_match %r{add_index\s+"index_comments",\s+\[\"string\"\],\s+name:\s+\"no_index_comment\",\s+using:\s+:btree$}, schema
