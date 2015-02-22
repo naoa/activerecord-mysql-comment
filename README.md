@@ -56,7 +56,7 @@ bundle exec rake db:migrate
 
 ## Note
 
-* Table options need [activerecord-mysql-awesome](https://github.com/kamipo/activerecord-mysql-awesome).
+* Table options need [activerecord-mysql-awesome](https://github.com/kamipo/activerecord-mysql-awesome). If you use ``rake db:reset``, you should install it.
 
 * If you use [activerecord-mysql-awesome](https://github.com/kamipo/activerecord-mysql-awesome), please loading it before load activerecord-mysql-comment.
 
